@@ -1,0 +1,51 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Contact Us</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-item>
+        <ion-label color="primary" floating>Name</ion-label>
+        <ion-input [(ngModel)]="contactUs.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Email address</ion-label>
+        <ion-input [(ngModel)]="contactUs.email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Phone Number</ion-label>
+        <ion-input [(ngModel)]="contactUs.phoneNumber" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>City</ion-label>
+        <ion-input [(ngModel)]="contactUs.city" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label floating>Message</ion-label>
+        <ion-textarea [(ngModel)]="contactUs.message"></ion-textarea>
+    </ion-item>
+
+    <ion-row>
+        <ion-col col-4>
+            <button ion-button (click)="onResetData()">
+                Reset
+            </button>
+        </ion-col>
+        <ion-col col-4>
+        </ion-col>
+        <ion-col col-4>
+            <button ion-button color="primary" (click)="onSendData()">
+                Send
+            </button>
+        </ion-col>
+    </ion-row>
+</ion-content>
