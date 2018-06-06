@@ -15,12 +15,13 @@ import { IonicPage, NavController, NavParams } from "ionic-angular";
 })
 export class ExamPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
+  isExamStart = false;
   ionViewDidLoad() {
     console.log("ionViewDidLoad ExamPage");
   }
 
   onStartExam = () => {
-    console.log(' --- Exam Start --- ');
+    console.log(" --- Exam Start --- ");
+    this.isExamStart = true;
   };
 }

@@ -15,21 +15,30 @@
 
 
 <ion-content padding>
-  <!--  -->
   <ion-card>
-    <ion-card-content>
-      <ion-card-title>
-        Instruction
-      </ion-card-title>
-      <p>
-        -> Subject like rules & regulation of traffic & traffic signage's are included in the test. -> 15 question are asked in the
-        test at random, out of which 9 question are required to be answered correctly to pass the test. -> 30 seconds are
-        allowed to answered each question.
-      </p>
-    </ion-card-content>
+    <!-- Exam module content here  -->
+    <div *ngIf="!isExamStart">
+      <ion-card-content>
+        <ion-card-title>
+          Instruction
+        </ion-card-title>
+        <p>
+          -> Subject like rules & regulation of traffic & traffic signage's are included in the test. -> 15 question are asked in the
+          test at random, out of which 9 question are required to be answered correctly to pass the test. -> 30 seconds are
+          allowed to answered each question.
+        </p>
+      </ion-card-content>
 
-    <ion-item>
-      <button ion-button full (click)="onStartExam()">Start Exam</button>
-    </ion-item>
+      <ion-item>
+        <button ion-button full (click)="onStartExam()">Start Exam</button>
+      </ion-item>
+    </div>
+
+    <!-- Question content starts here -->
+    <div *ngIf="isExamStart">
+      <question-section-component>
+      </question-section-component>
+    </div>
   </ion-card>
+
 </ion-content>
