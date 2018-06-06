@@ -18,6 +18,6 @@ export class QuestionSectionComponent {
   @Input() questionInput = [];
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad QuestionSection");
+    console.log("ionViewDidLoad QuestionSection", this.questionInput);
   }
 }

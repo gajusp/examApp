@@ -9,10 +9,9 @@ import { IModulePage } from "../../app/models/models";
 @Component({
   selector: "page-home",
   templateUrl: "home.html",
-  styleUrls:['']
+  styleUrls: ['']
 })
 export class HomePage {
-  showFooter = false;
   pages: IModulePage[];
 
   constructor(public navCtrl: NavController) {
