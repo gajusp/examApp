@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { NavController, NavParams } from "ionic-angular";
 
 /**
  * Generated class for the QuestionBankPage page.
@@ -13,15 +12,22 @@ import { NavController, NavParams } from "ionic-angular";
   templateUrl: "answer-section-component.html"
 })
 export class AnswerSectionComponent {
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  @Input() questionInput = [];
+  @Input() questionInput: any;
+  constructor() {
+    console.log("ionViewDidLoad AnswerSectionPage", this.questionInput);
+  }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad AnswerSectionPage");
   }
 
   onTapAnswer = () => {
-    alert("answer tap");
+    // console.log(
+    //   "answer tap --- ",
+    //   this.questionAnsService.getCurrentQuestion()
+    // );
+    // this.questionAnsService.selectedQuestionEvent.emit({
+    //   selectedAnswer: this.questionAnsService.getCurrentQuestion()
+    // });
   };
 }

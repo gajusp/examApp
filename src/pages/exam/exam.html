@@ -17,7 +17,7 @@
 <ion-content padding>
   <ion-card>
     <!-- Exam module content here  -->
-    <div *ngIf="!isExamStart">
+    <div *ngIf="false">
       <ion-card-content>
         <ion-card-title>
           Instruction
@@ -35,8 +35,8 @@
     </div>
 
     <!-- Question content starts here -->
-    <div *ngIf="isExamStart">
-      <question-section-component [questionInput]="questionAnswerArr">
+    <div>
+      <question-section-component #questionanswerComp>
       </question-section-component>
     </div>
   </ion-card>
@@ -53,7 +53,7 @@
       </button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-right color="royal">
+      <button ion-button icon-right color="royal" (tap)="onTapNext()">
         Next
         <!-- <ion-icon name="ios-skip-forward" small style="top:-10px;"></ion-icon> -->
       </button>

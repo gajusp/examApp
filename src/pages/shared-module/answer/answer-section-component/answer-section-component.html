@@ -5,14 +5,9 @@
   Ionic pages and navigation.
 -->
 <ion-list inset>
-  <ion-item>
+  <ion-item *ngFor="let answerObj of answerInput">
     <div (tap)="onTapAnswer()">
-      1. Yes
-    </div>
-  </ion-item>
-  <ion-item>
-    <div (tap)="onTapAnswer()">
-      2. No
+      {{answerObj.answer}}
     </div>
   </ion-item>
 </ion-list>
