@@ -4,15 +4,15 @@ import { IonicApp, IonicErrorHandler, IonicModule } from "ionic-angular";
 import { SplashScreen } from "@ionic-native/splash-screen";
 import { StatusBar } from "@ionic-native/status-bar";
 
-import { RTOApp } from "./app.component";
+import { ExamApp } from "./app.component";
 import { HomeModule } from "../pages/home/home.module";
 import { QuestionAnswerService } from "./services/question-answer-service";
 
 @NgModule({
-  declarations: [RTOApp],
-  imports: [BrowserModule, IonicModule.forRoot(RTOApp), HomeModule],
+  declarations: [ExamApp],
+  imports: [BrowserModule, IonicModule.forRoot(ExamApp), HomeModule],
   bootstrap: [IonicApp],
-  entryComponents: [RTOApp],
+  entryComponents: [ExamApp],
   providers: [
     StatusBar,
     SplashScreen,

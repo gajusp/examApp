@@ -11,5 +11,11 @@
     <img src="" *ngIf="false">
   </div>
   <!-- Answer content here -->
-  <answer-section-component></answer-section-component>
+  <ion-list inset>
+    <ion-item *ngFor="let answerObj of answerInput">
+      <div (tap)="onTapAnswer()">
+        {{answerObj.answer}}
+      </div>
+    </ion-item>
+  </ion-list>
 </div>
