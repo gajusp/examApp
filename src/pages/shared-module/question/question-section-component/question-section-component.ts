@@ -16,4 +16,13 @@ export class QuestionSectionComponent {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log("Constructor QuestionSection", this.questionInput);
   }
+
+  onGetQuestionAnsData() {
+    console.log("Constructor QuestionSection", this.questionInput);
+    return this.questionInput ? this.questionInput : {};
+  }
+
+  onTapAnswer(answerObj) {
+    console.log(" --- Selected answer --- ", answerObj);
+  }
 }

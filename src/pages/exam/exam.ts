@@ -15,8 +15,8 @@ import { QuestionSectionComponent } from "../shared-module/question/question-sec
   templateUrl: "exam.html"
 })
 export class ExamPage {
-  @ViewChild(QuestionSectionComponent)
-  questionanswerComp: QuestionSectionComponent;
+  // @ViewChild(QuestionSectionComponent)
+  // questionanswerComp: QuestionSectionComponent;
   private currentQuestionIndex = 0;
   showFooter = false;
   isExamStart = false;
@@ -33,7 +33,7 @@ export class ExamPage {
     this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
       this.currentQuestionIndex
     ];
-    this.questionanswerComp.questionInput = this.questionAnsService.getCurrentQuestion;
+    // this.questionanswerComp.questionInput = this.questionAnsService.getCurrentQuestion;
   }
 
   ionViewDidLoad() {
@@ -41,7 +41,7 @@ export class ExamPage {
     this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
       this.currentQuestionIndex
     ];
-    this.questionanswerComp.questionInput = this.questionAnsService.getCurrentQuestion;
+    // this.questionanswerComp.questionInput = this.questionAnsService.getCurrentQuestion;
   }
 
   onStartExam = () => {

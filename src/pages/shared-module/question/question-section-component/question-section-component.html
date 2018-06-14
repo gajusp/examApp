@@ -7,13 +7,13 @@
 
 <div>
   <div style="padding: 2%; border-bottom: 0.55px solid #c8c7cc;font-size: 16px;">
-    <!-- {{questionInput.question}} -->
+    {{onGetQuestionAnsData().question}}
     <img src="" *ngIf="false">
   </div>
   <!-- Answer content here -->
   <ion-list inset>
-    <ion-item *ngFor="let answerObj of answerInput">
-      <div (tap)="onTapAnswer()">
+    <ion-item *ngFor="let answerObj of onGetQuestionAnsData().options">
+      <div (tap)="onTapAnswer(answerObj)">
         {{answerObj.answer}}
       </div>
     </ion-item>
