@@ -1,0 +1,231 @@
+[
+  {
+    "id": 1,
+    "question":
+      "You are taking drugs that are likely to affect your driving. What should you do?",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Seek medical advice before driving",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "Limit your driving to essential journeys",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Drive only for short distances",
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "answer": "None of Above",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "To signal while taking U-turn",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Left turn signal",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Slow down signal",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Right turn signal",
+        "isCorrect": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "When you see the traffic sign of School, you should",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Stop the vehicle, sound horn and proceed",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Sound horn continuously and proceed",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Slow down and proceed with caution",
+        "isCorrect": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Parking is prohibited in the following place",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Entrance of hospital",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Left side of the road",
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "answer": "Market area",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "When a blind person crosses the road holding White Cane",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer":
+          "The driver of a vehicle shall consider the white cane as a traffic sign to stop the vehicle",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "Slow down and proceed with caution",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Blow the horn and proceed",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "question": "What is meant by stop line?",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer":
+          "line in white or yellow colour at the approach of road junction or pedestrian crossings",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "line drawn through the center of the road in yellow colour",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "broken white line through the center of the road",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "question": "The following sign represents...",
+    "img_url": "assets/imgs/cross_road.png",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Cross Road",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "No Entry",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Hospital",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "question":
+      "Which of the following may help to deter a thief from stealing your car?",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Always keeping the interior light on",
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "answer": "Always keep the headlights on",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Etching the registration number on the windows",
+        "isCorrect": true
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "question": "You can overtake a vehicle in front..",
+    "img_url": "",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Through the right side of that vehicle",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "U-Turn prohibited",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Through the left side of that vehicle",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "question": "The following sign represents...",
+    "img_url": "assets/imgs/right_turn_prohibited.png",
+    "options": [
+      {
+        "id": 1,
+        "answer": "Overtaking through left prohibited",
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "answer": "Overtaking through right prohibited",
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "answer": "Right turn prohibited",
+        "isCorrect": true
+      }
+    ]
+  }
+]

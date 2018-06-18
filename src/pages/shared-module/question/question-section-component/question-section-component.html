@@ -8,7 +8,7 @@
 <div>
   <div style="padding: 2%; border-bottom: 0.55px solid #c8c7cc;font-size: 16px;">
     {{onGetQuestionAnsData().question}}
-    <img src="" *ngIf="false">
+    <img [src]="onGetQuestionAnsData().img_url" *ngIf="onGetQuestionAnsData().img_url">
   </div>
   <!-- Answer content here -->
   <ion-list inset>

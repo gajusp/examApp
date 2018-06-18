@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
 
 /**
@@ -13,16 +13,18 @@ import { NavController, NavParams } from "ionic-angular";
 })
 export class QuestionSectionComponent {
   @Input() questionInput: any;
+  @Output() onSelectedAnswerEvent = new EventEmitter<any>();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     console.log("Constructor QuestionSection", this.questionInput);
   }
 
   onGetQuestionAnsData() {
     console.log("Constructor QuestionSection", this.questionInput);
-    return this.questionInput ? this.questionInput : {};
+    return Object.assign({}, this.questionInput);
   }
 
   onTapAnswer(answerObj) {
     console.log(" --- Selected answer --- ", answerObj);
+    this.onSelectedAnswerEvent.emit(answerObj);
   }
 }

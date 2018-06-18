@@ -1,7 +1,6 @@
 import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams } from "ionic-angular";
 import { QuestionAnswerService } from "../../app/services/question-answer-service";
-import { QuestionSectionComponent } from "../shared-module/question/question-section-component/question-section-component";
 
 /**
  * Generated class for the ExamPage page.
@@ -15,46 +14,59 @@ import { QuestionSectionComponent } from "../shared-module/question/question-sec
   templateUrl: "exam.html"
 })
 export class ExamPage {
-  // @ViewChild(QuestionSectionComponent)
-  // questionanswerComp: QuestionSectionComponent;
-  private currentQuestionIndex = 0;
+  private selectedAnswerObj: any;
+  private correctAnswer: number;
+  private wrongAnswer: number;
   showFooter = false;
   isExamStart = false;
+  isAllQuestionCompleted = false;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private questionAnsService: QuestionAnswerService
   ) {
-    console.log("ionViewEnter ExamPage");
+    this.correctAnswer = 0;
+    this.wrongAnswer = 0;
   }
 
   ionViewDidEnter() {
     console.log("ionViewEnter ExamPage");
-    this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
-      this.currentQuestionIndex
-    ];
-    // this.questionanswerComp.questionInput = this.questionAnsService.getCurrentQuestion;
   }
 
   ionViewDidLoad() {
     console.log("ionViewDidLoad ExamPage");
-    this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
-      this.currentQuestionIndex
-    ];
-    // this.questionanswerComp.questionInput = this.questionAnsService.getCurrentQuestion;
   }
 
   onStartExam = () => {
     console.log(" --- Exam Start --- ");
     this.isExamStart = true;
     this.showFooter = true;
+    this.questionAnsService.currentQuestionIndex = 0;
+    this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
+      this.questionAnsService.currentQuestionIndex
+    ];
+  };
+
+  selectedAnswer = (selectedAnswer: any) => {
+    console.log(selectedAnswer);
+    this.selectedAnswerObj = selectedAnswer;
   };
 
   onTapNext = () => {
-    this.currentQuestionIndex++;
-    console.log("--- on Next tap --- ", this.currentQuestionIndex);
+    // update the correct answer array.
+    this.questionAnsService.updateCorrectAnswer(this.selectedAnswerObj);
+    this.correctAnswer = this.questionAnsService.getCorrectAnswerLength;
+    this.wrongAnswer = this.questionAnsService.getWrongAnswerLength;
+    this.questionAnsService.currentQuestionIndex++;
     this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
-      this.currentQuestionIndex
+      this.questionAnsService.currentQuestionIndex
     ];
+    if (
+      this.questionAnsService.currentQuestionIndex ===
+      this.questionAnsService.getQuestionAnswerData.length - 1
+    ) {
+      this.isAllQuestionCompleted = true;
+    }
   };
 }

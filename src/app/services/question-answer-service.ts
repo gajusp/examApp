@@ -1,55 +1,18 @@
 import { EventEmitter, Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class QuestionAnswerService {
-  private questionAnswerArr = [
-    {
-      id: 1,
-      question:
-        "You have stalled in the middle of a level crossing & can't restart the engine. The train arrival bell starts",
-      options: [
-        {
-          id: 1,
-          answer: "Yes",
-          isCorrect: true
-        },
-        {
-          id: 2,
-          answer: "No",
-          isCorrect: false
-        },
-        {
-          id: 3,
-          answer: "None of Above",
-          isCorrect: false
-        }
-      ]
-    },
-    {
-      id: 2,
-      question: "Turn Left",
-      options: [
-        {
-          id: 1,
-          answer: "Left Arrow",
-          isCorrect: false
-        },
-        {
-          id: 2,
-          answer: "Left Arrow",
-          isCorrect: true
-        },
-        {
-          id: 3,
-          answer: "None of Above",
-          isCorrect: false
-        }
-      ]
-    }
-  ];
+  private dataPath = "assets/data/en_data.json";
+  private questionAnswerArr: any;
   private currentQuestionObj: any;
+  private correctAnswer = [];
+  private wrongAnswer = [];
+  currentQuestionIndex = 0;
   selectedQuestionEvent = new EventEmitter();
-  constructor() {}
+  constructor(private http: HttpClient) {
+    this.setQuestionanswerData();
+  }
 
   get getQuestionAnswerData(): any {
     return this.questionAnswerArr;
@@ -61,5 +24,33 @@ export class QuestionAnswerService {
 
   get getCurrentQuestion() {
     return this.currentQuestionObj;
+  }
+
+  get getCorrectAnswerLength() {
+    return this.correctAnswer.length;
+  }
+
+  get getWrongAnswerLength() {
+    return this.wrongAnswer.length;
+  }
+
+  setQuestionanswerData() {
+    this.http.get(this.dataPath).subscribe(data => {
+      this.questionAnswerArr = data;
+    });
+  }
+
+  updateCorrectAnswer(selectedAnswer: any) {
+    if (selectedAnswer.isCorrect) {
+      this.correctAnswer.push(this.currentQuestionObj);
+    } else {
+      this.wrongAnswer.push(this.currentQuestionObj);
+    }
+  }
+
+  resetData() {
+    this.correctAnswer = [];
+    this.currentQuestionObj = undefined;
+    this.currentQuestionIndex = 0;
   }
 }

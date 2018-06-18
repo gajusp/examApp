@@ -7,10 +7,16 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { ExamApp } from "./app.component";
 import { HomeModule } from "../pages/home/home.module";
 import { QuestionAnswerService } from "./services/question-answer-service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [ExamApp],
-  imports: [BrowserModule, IonicModule.forRoot(ExamApp), HomeModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(ExamApp),
+    HomeModule
+  ],
   bootstrap: [IonicApp],
   entryComponents: [ExamApp],
   providers: [

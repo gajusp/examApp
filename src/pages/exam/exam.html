@@ -17,7 +17,7 @@
 <ion-content padding>
   <ion-card>
     <!-- Exam module content here  -->
-    <div *ngIf="false">
+    <div *ngIf="!isExamStart">
       <ion-card-content>
         <ion-card-title>
           Instruction
@@ -35,9 +35,27 @@
     </div>
 
     <!-- Question content starts here -->
-    <div>
-      <question-section-component #questionanswerComp [questionInput]="questionAnsService.getCurrentQuestion">
+    <div *ngIf="isExamStart && !isAllQuestionCompleted">
+      <question-section-component [questionInput]="questionAnsService.getCurrentQuestion" (onSelectedAnswerEvent)="selectedAnswer($event)">
       </question-section-component>
+    </div>
+
+    <div *ngIf="isAllQuestionCompleted">
+      <div>
+        Your Score board :
+        <div>
+          Correct Answer : {{correctAnswer}}
+        </div>
+        <div>
+          Wrong Answer : {{wrongAnswer}}
+        </div>
+        <div *ngIf="correctAnswer>6" style="color: green;">
+          You Passed...!!!
+        </div>
+        <div *ngIf="correctAnswer<6" style="color: red;">
+          You Failed...!!!
+        </div>
+      </div>
     </div>
   </ion-card>
 
@@ -48,8 +66,12 @@
   <ion-toolbar>
     <ion-buttons start>
       <button ion-button icon-right color="royal">
-        <div style="background-color: seagreen;width: 50px;height: 90%;font-weight: bold;text-align: center;color: black;padding-top: 5%;">5</div>
-        <div style="background-color:tomato;width: 50px;height: 90%;font-weight: bold;text-align: center;color: black;padding-top: 5%;">2</div>
+        <div style="background-color: seagreen;width: 50px;height: 90%;font-weight: bold;text-align: center;color: black;padding-top: 5%;">
+          {{correctAnswer}}
+        </div>
+        <div style="background-color:tomato;width: 50px;height: 90%;font-weight: bold;text-align: center;color: black;padding-top: 5%;">
+          {{wrongAnswer}}
+        </div>
       </button>
     </ion-buttons>
     <ion-buttons end>
