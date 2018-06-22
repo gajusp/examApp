@@ -13,7 +13,8 @@
   <!-- Answer content here -->
   <ion-list inset>
     <ion-item *ngFor="let answerObj of onGetQuestionAnsData().options">
-      <div (tap)="onTapAnswer(answerObj)">
+      <!-- [ngClass]="isSelectedAnswer : 'selected-answer' : ''"  -->
+      <div (tap)="onTapAnswer(answerObj)" [ngClass]="answerObj.isSelectedAnswer ? 'selected-answer': ''">
         {{answerObj.answer}}
       </div>
     </ion-item>

@@ -67,6 +67,8 @@ export class ExamPage {
       this.questionAnsService.getQuestionAnswerData.length - 1
     ) {
       this.isAllQuestionCompleted = true;
+      // reset data
+      this.questionAnsService.resetData();
     }
   };
 }

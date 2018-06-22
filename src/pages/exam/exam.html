@@ -62,7 +62,7 @@
 </ion-content>
 
 <!-- Footer -->
-<ion-footer *ngIf="showFooter">
+<ion-footer *ngIf="showFooter && !this.isAllQuestionCompleted">
   <ion-toolbar>
     <ion-buttons start>
       <button ion-button icon-right color="royal">

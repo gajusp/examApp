@@ -26,5 +26,6 @@ export class QuestionSectionComponent {
   onTapAnswer(answerObj) {
     console.log(" --- Selected answer --- ", answerObj);
     this.onSelectedAnswerEvent.emit(answerObj);
+    answerObj.isSelectedAnswer = true;
   }
 }
