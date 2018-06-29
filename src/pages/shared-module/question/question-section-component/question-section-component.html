@@ -12,11 +12,14 @@
   </div>
   <!-- Answer content here -->
   <ion-list inset>
-    <ion-item *ngFor="let answerObj of onGetQuestionAnsData().options">
+    <ion-item *ngFor="let answerObj of onGetQuestionAnsData().options; let indx = index">
       <!-- [ngClass]="isSelectedAnswer : 'selected-answer' : ''"  -->
-      <div (tap)="onTapAnswer(answerObj)" [ngClass]="answerObj.isSelectedAnswer ? 'selected-answer': ''">
-        {{answerObj.answer}}
-      </div>
+      <span style="display: flex;">
+        {{indx + 1 }}.
+        <div (tap)="onTapAnswer(answerObj, indx)" [ngClass]="selectedRow === indx? 'selected-answer': ''">
+          {{ answerObj.answer}}
+        </div>
+      </span>
     </ion-item>
   </ion-list>
 </div>

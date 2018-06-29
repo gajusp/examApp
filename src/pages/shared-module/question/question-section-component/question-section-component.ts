@@ -12,20 +12,17 @@ import { NavController, NavParams } from "ionic-angular";
   templateUrl: "question-section-component.html"
 })
 export class QuestionSectionComponent {
+  private selectedRow: number;
   @Input() questionInput: any;
   @Output() onSelectedAnswerEvent = new EventEmitter<any>();
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    console.log("Constructor QuestionSection", this.questionInput);
-  }
+  constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   onGetQuestionAnsData() {
-    console.log("Constructor QuestionSection", this.questionInput);
-    return Object.assign({}, this.questionInput);
+    return this.questionInput;
   }
 
-  onTapAnswer(answerObj) {
-    console.log(" --- Selected answer --- ", answerObj);
+  onTapAnswer(answerObj, index) {
     this.onSelectedAnswerEvent.emit(answerObj);
-    answerObj.isSelectedAnswer = true;
+    this.selectedRow = index;
   }
 }

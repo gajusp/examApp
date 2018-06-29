@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
+import { IonicPage, NavController, NavParams, Navbar } from "ionic-angular";
 import { QuestionAnswerService } from "../../app/services/question-answer-service";
 
 /**
@@ -14,9 +14,13 @@ import { QuestionAnswerService } from "../../app/services/question-answer-servic
   templateUrl: "exam.html"
 })
 export class ExamPage {
+  @ViewChild(Navbar) navBar: Navbar;
+  private timerCounter = 0;
+  private timerInterval = undefined;
   private selectedAnswerObj: any;
   private correctAnswer: number;
   private wrongAnswer: number;
+  private isExamPasses = false;
   showFooter = false;
   isExamStart = false;
   isAllQuestionCompleted = false;
@@ -35,25 +39,37 @@ export class ExamPage {
   }
 
   ionViewDidLoad() {
-    console.log("ionViewDidLoad ExamPage");
+    this.navBar.backButtonClick = (e: UIEvent) => {
+      console.log("Back button pressed --- ");
+      this.resetData();
+      this.navCtrl.pop();
+    };
   }
 
+  startTimerCounter = (seconds: number) => {
+    this.timerCounter = seconds || 30;
+    this.timerInterval = setInterval(() => {
+      this.timerCounter--;
+      if (this.timerCounter === 0) {
+        clearInterval(this.timerInterval);
+        this.timerInterval = undefined;
+        // go to next question automatically
+        this.onTapNext();
+      } else {
+      }
+    }, 1000);
+  };
+
   onStartExam = () => {
-    console.log(" --- Exam Start --- ");
-    this.isExamStart = true;
-    this.showFooter = true;
-    this.questionAnsService.currentQuestionIndex = 0;
-    this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
-      this.questionAnsService.currentQuestionIndex
-    ];
+    this.onSetInitialQuestion();
   };
 
   selectedAnswer = (selectedAnswer: any) => {
-    console.log(selectedAnswer);
     this.selectedAnswerObj = selectedAnswer;
   };
 
   onTapNext = () => {
+    this.clearTimer();
     // update the correct answer array.
     this.questionAnsService.updateCorrectAnswer(this.selectedAnswerObj);
     this.correctAnswer = this.questionAnsService.getCorrectAnswerLength;
@@ -62,13 +78,62 @@ export class ExamPage {
     this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
       this.questionAnsService.currentQuestionIndex
     ];
+    this.startTimerCounter(30);
     if (
       this.questionAnsService.currentQuestionIndex ===
-      this.questionAnsService.getQuestionAnswerData.length - 1
+      this.questionAnsService.getQuestionAnswerData.length
     ) {
+      this.clearTimer();
+      this.calculatePassingPercent();
       this.isAllQuestionCompleted = true;
-      // reset data
-      this.questionAnsService.resetData();
+    }
+  };
+
+  onBackORRetry = () => {
+    this.resetData();
+    if (this.isExamPasses) {
+      this.navCtrl.pop();
+    } else {
+      this.onSetInitialQuestion();
+    }
+  };
+
+  onSetInitialQuestion() {
+    this.isAllQuestionCompleted = false;
+    this.isExamStart = true;
+    this.showFooter = true;
+    this.questionAnsService.currentQuestionIndex = 0;
+    this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
+      this.questionAnsService.currentQuestionIndex
+    ];
+    this.startTimerCounter(30);
+  }
+
+  calculatePassingPercent() {
+    let passingPercent = 55;
+    let min_passing_percent =
+      (passingPercent / 100) *
+      this.questionAnsService.getQuestionAnswerData.length;
+    this.isExamPasses =
+      Math.round(min_passing_percent) <=
+      this.questionAnsService.getCorrectAnswerLength;
+  }
+
+  resetData = () => {
+    // reset data
+    this.correctAnswer = 0;
+    this.wrongAnswer = 0;
+    this.showFooter = false;
+    this.isExamStart = false;
+    this.isAllQuestionCompleted = false;
+    this.questionAnsService.resetData();
+  };
+
+  clearTimer = () => {
+    //check interval timer
+    if (this.timerInterval) {
+      clearInterval(this.timerInterval);
+      this.timerInterval = undefined;
     }
   };
 }

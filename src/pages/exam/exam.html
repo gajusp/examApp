@@ -8,7 +8,7 @@
 
   <ion-navbar>
     <ion-title>Exam</ion-title>
-    <ion-icon name="time" end></ion-icon>
+    <ion-icon *ngIf="showFooter && !this.isAllQuestionCompleted" name="time" style="float: right;" end>{{timerCounter}}</ion-icon>
   </ion-navbar>
 
 </ion-header>
@@ -40,6 +40,7 @@
       </question-section-component>
     </div>
 
+    <!-- Score Board -->
     <div *ngIf="isAllQuestionCompleted">
       <div>
         Your Score board :
@@ -49,11 +50,14 @@
         <div>
           Wrong Answer : {{wrongAnswer}}
         </div>
-        <div *ngIf="correctAnswer>6" style="color: green;">
+        <div *ngIf="isExamPasses" style="color: green;">
           You Passed...!!!
         </div>
-        <div *ngIf="correctAnswer<6" style="color: red;">
+        <div *ngIf="!isExamPasses" style="color: red;">
           You Failed...!!!
+        </div>
+        <div style="width: 100%;padding: 3% 38% 2%;height: 50px;">
+          <button style="min-width: 150px; min-height:30px;" (tap)="onBackORRetry()">{{ isExamPasses ? 'Back to Dashboard' : 'Retry'}}</button>
         </div>
       </div>
     </div>
