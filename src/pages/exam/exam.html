@@ -40,7 +40,7 @@
       </question-section-component>
     </div>
 
-    <!-- Score Board -->
+    <!-- Result Board -->
     <div *ngIf="isAllQuestionCompleted">
       <div>
         Your Score board :
@@ -57,9 +57,14 @@
           You Failed...!!!
         </div>
         <div style="width: 100%;padding: 3% 38% 2%;height: 50px;">
-          <button style="min-width: 150px; min-height:30px;" (tap)="onBackORRetry()">{{ isExamPasses ? 'Back to Dashboard' : 'Retry'}}</button>
+          <button style="min-width: 150px; min-height:30px;" (tap)="onHomeORScoreboard()">{{ isExamPasses ? 'Home' : 'Score Board'}}</button>
         </div>
       </div>
+    </div>
+
+    <!-- Score Board -->
+    <div>
+
     </div>
   </ion-card>
 

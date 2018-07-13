@@ -1,17 +1,19 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+import { QAConfigModal } from "../models/models";
 
 @Injectable()
 export class QuestionAnswerService {
-  private dataPath = "assets/data/en_data.json";
-  private questionAnswerArr: any;
+  private questionAnswerArr: QAConfigModal[];
   private currentQuestionObj: any;
   private correctAnswer = [];
   private wrongAnswer = [];
   currentQuestionIndex = 0;
   selectedQuestionEvent = new EventEmitter();
-  constructor(private http: HttpClient) {
-    this.setQuestionanswerData();
+  constructor(private http: HttpClient) { }
+
+  public setQuestionAnswerData(qaArray: QAConfigModal[]) {
+    this.questionAnswerArr = qaArray;
   }
 
   get getQuestionAnswerData(): any {
@@ -34,10 +36,11 @@ export class QuestionAnswerService {
     return this.wrongAnswer.length;
   }
 
-  setQuestionanswerData() {
-    this.http.get(this.dataPath).subscribe(data => {
-      this.questionAnswerArr = data;
-    });
+  public getQuestionanswerDataAsync(dataPath: string) {
+    return this.http.get(dataPath);
+    // .subscribe(data => {
+    //   this.questionAnswerArr = data;
+    // });
   }
 
   updateCorrectAnswer(selectedAnswer: any) {

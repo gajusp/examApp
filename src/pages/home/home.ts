@@ -5,16 +5,19 @@ import { PracticePage } from "../practice/practice";
 import { ExamPage } from "../exam/exam";
 import { SettingPage } from "../setting/setting";
 import { IModulePage } from "../../app/models/models";
+import { AppStoreService } from "../../app/services/app-store.service";
+import { FetchQADataAction } from "./home.action";
 
 @Component({
   selector: "page-home",
   templateUrl: "home.html",
-  styleUrls: ['']
+  styleUrls: [""]
 })
 export class HomePage {
   pages: IModulePage[];
+  private dataPath = "assets/data/en_data.json";
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private appStore: AppStoreService) {
     this.pages = [
       {
         title: "Question Bank",
@@ -43,6 +46,8 @@ export class HomePage {
         icon: "settings"
       }
     ];
+
+    this.appStore.dispatch(new FetchQADataAction(this.dataPath));
   }
 
   onLoadModule(pageObj: any) {

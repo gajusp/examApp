@@ -1,6 +1,7 @@
 import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams, Navbar } from "ionic-angular";
 import { QuestionAnswerService } from "../../app/services/question-answer-service";
+import { AppStoreService, QADataSelector } from "../../app/services/app-store.service";
 
 /**
  * Generated class for the ExamPage page.
@@ -24,14 +25,20 @@ export class ExamPage {
   showFooter = false;
   isExamStart = false;
   isAllQuestionCompleted = false;
+  private allQAData = [];
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private questionAnsService: QuestionAnswerService
+    private questionAnsService: QuestionAnswerService,
+    private appStore: AppStoreService
   ) {
     this.correctAnswer = 0;
     this.wrongAnswer = 0;
+
+    this.appStore.select(QADataSelector.getQADataState).subscribe((qaDataState) => {
+      this.allQAData = qaDataState;
+    });
   }
 
   ionViewDidEnter() {
@@ -89,7 +96,7 @@ export class ExamPage {
     }
   };
 
-  onBackORRetry = () => {
+  onHomeORScoreboard = () => {
     this.resetData();
     if (this.isExamPasses) {
       this.navCtrl.pop();
