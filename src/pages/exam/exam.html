@@ -36,7 +36,7 @@
 
     <!-- Question content starts here -->
     <div *ngIf="isExamStart && !isAllQuestionCompleted">
-      <question-section-component [questionInput]="questionAnsService.getCurrentQuestion" (onSelectedAnswerEvent)="selectedAnswer($event)">
+      <question-section-component (selectedAnswerEvent)="onSelectedAnswer($event)">
       </question-section-component>
     </div>
 

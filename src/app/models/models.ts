@@ -27,11 +27,17 @@ export interface QAConfigModal {
   id: string;
   question: string;
   imgUrl: string;
-  options: Array<AnswerModal>;
+  options: QAAnswerModal[];
 }
 
-export interface AnswerModal {
+export interface QAAnswerModal {
   id: string;
   answer: string;
   isCorrectAnswer: boolean;
+  selectedRow: boolean;
+}
+
+export interface CorrectWrongAnsModal {
+  correctAnswer: QAConfigModal[];
+  wrongAnswer: QAConfigModal[];
 }

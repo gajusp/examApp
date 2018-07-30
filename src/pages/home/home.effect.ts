@@ -1,5 +1,5 @@
-import { Actions, Effect, ofType } from "../../../node_modules/@ngrx/effects";
-import { Injector, Injectable } from '@angular/core';
+import { Actions, Effect, ofType } from "@ngrx/effects";
+import { Injector, Injectable } from "@angular/core";
 import { of } from "rxjs/observable/of";
 import { map, switchMap } from "rxjs/operators";
 import { zip } from "rxjs/observable/zip";
@@ -9,7 +9,7 @@ import { QAConfigModal } from "../../app/models/models";
 
 @Injectable()
 export class HomeEffects {
-  constructor(private action$: Actions, private inject: Injector) { }
+  constructor(private action$: Actions, private inject: Injector) {}
 
   @Effect()
   homeEff$ = this.action$.pipe(

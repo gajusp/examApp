@@ -1,5 +1,10 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { NavController, NavParams } from "ionic-angular";
+import { QAConfigModal, QAAnswerModal } from "../../../../app/models/models";
+import {
+  QADataSelector,
+  AppStoreService
+} from "../../../../app/services/app-store.service";
 
 /**
  * Generated class for the QuestionBankPage page.
@@ -12,17 +17,27 @@ import { NavController, NavParams } from "ionic-angular";
   templateUrl: "question-section-component.html"
 })
 export class QuestionSectionComponent {
-  private selectedRow: number;
-  @Input() questionInput: any;
-  @Output() onSelectedAnswerEvent = new EventEmitter<any>();
-  constructor(public navCtrl: NavController, public navParams: NavParams) {}
-
-  onGetQuestionAnsData() {
-    return this.questionInput;
+  private selectedQA: QAConfigModal;
+  @Output() selectedAnswerEvent = new EventEmitter<any>();
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private appStore: AppStoreService
+  ) {
+    this.appStore.select(QADataSelector.getQADataState).subscribe(homeState => {
+      this.selectedQA = homeState.selectedQA;
+    });
   }
 
-  onTapAnswer(answerObj, index) {
-    this.onSelectedAnswerEvent.emit(answerObj);
-    this.selectedRow = index;
+  onTapAnswer(answerObj: QAAnswerModal) {
+    this.updatedPreviousSelectedRow();
+    answerObj.selectedRow = true;
+    this.selectedAnswerEvent.emit(answerObj);
+  }
+
+  updatedPreviousSelectedRow() {
+    this.selectedQA.options.forEach((answerObj: QAAnswerModal) => {
+      answerObj.selectedRow = false;
+    });
   }
 }

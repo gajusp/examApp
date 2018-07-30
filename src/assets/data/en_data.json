@@ -8,22 +8,26 @@
       {
         "id": 1,
         "answer": "Seek medical advice before driving",
-        "isCorrect": true
+        "isCorrectAnswer": true,
+        "selectedRow": false
       },
       {
         "id": 2,
         "answer": "Limit your driving to essential journeys",
-        "isCorrect": false
+        "isCorrectAnswer": false,
+        "selectedRow": false
       },
       {
         "id": 3,
         "answer": "Drive only for short distances",
-        "isCorrect": false
+        "isCorrectAnswer": false,
+        "selectedRow": false
       },
       {
         "id": 4,
         "answer": "None of Above",
-        "isCorrect": false
+        "isCorrectAnswer": false,
+        "selectedRow": false
       }
     ]
   },
@@ -35,17 +39,20 @@
       {
         "id": 1,
         "answer": "Left turn signal",
-        "isCorrect": false
+        "isCorrectAnswer": false,
+        "selectedRow": false
       },
       {
         "id": 2,
         "answer": "Slow down signal",
-        "isCorrect": false
+        "isCorrectAnswer": false,
+        "selectedRow": false
       },
       {
         "id": 3,
         "answer": "Right turn signal",
-        "isCorrect": true
+        "isCorrectAnswer": true,
+        "selectedRow": false
       }
     ]
   },
@@ -57,17 +64,20 @@
       {
         "id": 1,
         "answer": "Stop the vehicle, sound horn and proceed",
-        "isCorrect": false
+        "isCorrectAnswer": false,
+        "selectedRow": false
       },
       {
         "id": 2,
         "answer": "Sound horn continuously and proceed",
-        "isCorrect": false
+        "isCorrectAnswer": false,
+        "selectedRow": false
       },
       {
         "id": 3,
         "answer": "Slow down and proceed with caution",
-        "isCorrect": true
+        "isCorrectAnswer": true,
+        "selectedRow": false
       }
     ]
   }

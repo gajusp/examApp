@@ -1,10 +1,10 @@
-import { Injectable } from "../../../node_modules/@angular/core";
+import { Injectable } from "@angular/core";
 import { Observable } from "../../../node_modules/rxjs/Observable";
 import { HomeState } from "../../pages/home/home.state";
-import { Store, Action } from "../../../node_modules/@ngrx/store";
+import { Store, Action } from "@ngrx/store";
 import { AppState } from "../app.state";
 import * as homeReducer from "../../pages/home/home.reducer";
-import * as qaDataSelector from '../../pages/home/home.reducer';
+import * as qaDataSelector from "../../pages/home/home.reducer";
 
 export const HomeReducer = homeReducer;
 export const QADataSelector = qaDataSelector;

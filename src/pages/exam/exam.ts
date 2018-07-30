@@ -1,7 +1,12 @@
 import { Component, ViewChild } from "@angular/core";
 import { IonicPage, NavController, NavParams, Navbar } from "ionic-angular";
 import { QuestionAnswerService } from "../../app/services/question-answer-service";
-import { AppStoreService, QADataSelector } from "../../app/services/app-store.service";
+import {
+  AppStoreService,
+  QADataSelector
+} from "../../app/services/app-store.service";
+import { QAConfigModal, QAAnswerModal } from "../../app/models/models";
+import { selectedQAAction, selectedAnswerAction } from "../home/home.action";
 
 /**
  * Generated class for the ExamPage page.
@@ -16,15 +21,17 @@ import { AppStoreService, QADataSelector } from "../../app/services/app-store.se
 })
 export class ExamPage {
   @ViewChild(Navbar) navBar: Navbar;
+  private currentQuestionIndex = 0;
   private timerCounter = 0;
   private timerInterval = undefined;
-  private selectedAnswerObj: any;
+  private selectedQuestion: QAConfigModal;
+  private selectedAnswerObj: QAAnswerModal;
   private correctAnswer: number;
   private wrongAnswer: number;
   private isExamPasses = false;
-  showFooter = false;
-  isExamStart = false;
-  isAllQuestionCompleted = false;
+  private showFooter = false;
+  private isExamStart = false;
+  private isAllQuestionCompleted = false;
   private allQAData = [];
 
   constructor(
@@ -36,8 +43,12 @@ export class ExamPage {
     this.correctAnswer = 0;
     this.wrongAnswer = 0;
 
-    this.appStore.select(QADataSelector.getQADataState).subscribe((qaDataState) => {
-      this.allQAData = qaDataState;
+    this.appStore.select(QADataSelector.getQADataState).subscribe(homeState => {
+      if (this.allQAData.length === 0) {
+        this.allQAData = [...homeState.qaModal];
+      }
+      this.correctAnswer = homeState.correctWrongAnsArr.correctAnswer.length;
+      this.wrongAnswer = homeState.correctWrongAnsArr.wrongAnswer.length;
     });
   }
 
@@ -69,27 +80,30 @@ export class ExamPage {
 
   onStartExam = () => {
     this.onSetInitialQuestion();
+    this.appStore.dispatch(new selectedAnswerAction(undefined));
+    if (this.allQAData.length > 0) {
+      this.selectedQuestion = this.allQAData[this.currentQuestionIndex];
+      this.appStore.dispatch(new selectedQAAction(this.selectedQuestion));
+    }
   };
 
-  selectedAnswer = (selectedAnswer: any) => {
-    this.selectedAnswerObj = selectedAnswer;
+  onSelectedAnswer = (answerObj: QAAnswerModal) => {
+    this.selectedAnswerObj = answerObj;
   };
 
   onTapNext = () => {
     this.clearTimer();
-    // update the correct answer array.
-    this.questionAnsService.updateCorrectAnswer(this.selectedAnswerObj);
-    this.correctAnswer = this.questionAnsService.getCorrectAnswerLength;
-    this.wrongAnswer = this.questionAnsService.getWrongAnswerLength;
-    this.questionAnsService.currentQuestionIndex++;
-    this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
-      this.questionAnsService.currentQuestionIndex
-    ];
+    //selected answer
+    this.selectedQuestion = this.allQAData[this.currentQuestionIndex];
+    this.appStore.dispatch(new selectedAnswerAction(this.selectedAnswerObj));
+    // go for next question
+    this.currentQuestionIndex++;
+    this.appStore.dispatch(
+      new selectedQAAction(this.allQAData[this.currentQuestionIndex])
+    );
     this.startTimerCounter(30);
-    if (
-      this.questionAnsService.currentQuestionIndex ===
-      this.questionAnsService.getQuestionAnswerData.length
-    ) {
+    // Result board logic
+    if (this.currentQuestionIndex === this.allQAData.length) {
       this.clearTimer();
       this.calculatePassingPercent();
       this.isAllQuestionCompleted = true;
@@ -97,11 +111,10 @@ export class ExamPage {
   };
 
   onHomeORScoreboard = () => {
-    this.resetData();
     if (this.isExamPasses) {
       this.navCtrl.pop();
     } else {
-      this.onSetInitialQuestion();
+      // go to score board
     }
   };
 
@@ -109,25 +122,19 @@ export class ExamPage {
     this.isAllQuestionCompleted = false;
     this.isExamStart = true;
     this.showFooter = true;
-    this.questionAnsService.currentQuestionIndex = 0;
-    this.questionAnsService.setCurrentQuestion = this.questionAnsService.getQuestionAnswerData[
-      this.questionAnsService.currentQuestionIndex
-    ];
+    this.currentQuestionIndex = 0;
     this.startTimerCounter(30);
   }
 
   calculatePassingPercent() {
     let passingPercent = 55;
-    let min_passing_percent =
-      (passingPercent / 100) *
-      this.questionAnsService.getQuestionAnswerData.length;
-    this.isExamPasses =
-      Math.round(min_passing_percent) <=
-      this.questionAnsService.getCorrectAnswerLength;
+    let min_passing_percent = (passingPercent / 100) * this.allQAData.length;
+    this.isExamPasses = Math.round(min_passing_percent) <= this.correctAnswer;
   }
 
   resetData = () => {
     // reset data
+    this.allQAData = [];
     this.correctAnswer = 0;
     this.wrongAnswer = 0;
     this.showFooter = false;
