@@ -1,5 +1,5 @@
 import { Component, ViewChild } from "@angular/core";
-import { IonicPage, NavController, NavParams, Navbar } from "ionic-angular";
+import { IonicPage, NavController, NavParams, Navbar, AlertController } from "ionic-angular";
 import { QuestionAnswerService } from "../../app/services/question-answer-service";
 import {
   AppStoreService,
@@ -29,6 +29,7 @@ export class ExamPage {
   private correctAnswer: number;
   private wrongAnswer: number;
   private isExamPasses = false;
+  private isReviewScore = false;
   private showFooter = false;
   private isExamStart = false;
   private isAllQuestionCompleted = false;
@@ -38,7 +39,7 @@ export class ExamPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private questionAnsService: QuestionAnswerService,
-    private appStore: AppStoreService
+    private appStore: AppStoreService, public alertCtrl: AlertController
   ) {
     this.correctAnswer = 0;
     this.wrongAnswer = 0;
@@ -57,12 +58,16 @@ export class ExamPage {
   }
 
   ionViewDidLoad() {
-    this.navBar.backButtonClick = (e: UIEvent) => {
-      console.log("Back button pressed --- ");
-      this.resetData();
-      this.navCtrl.pop();
+    this.navBar.backButtonClick = (uiEvt: UIEvent) => {
+      if (this.isAllQuestionCompleted) {
+        this.resetData();
+        this.navCtrl.pop();
+      } else {
+        this.exitExampConfirmAlert(uiEvt);
+      }
     };
   }
+
 
   startTimerCounter = (seconds: number) => {
     this.timerCounter = seconds || 30;
@@ -115,6 +120,7 @@ export class ExamPage {
       this.navCtrl.pop();
     } else {
       // go to score board
+      this.isReviewScore = true;
     }
   };
 
@@ -150,4 +156,28 @@ export class ExamPage {
       this.timerInterval = undefined;
     }
   };
+
+  exitExampConfirmAlert(uiEvt: UIEvent) {
+    const confirm = this.alertCtrl.create({
+      title: 'Are you want to exist exam?',
+      message: '',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            uiEvt.preventDefault();
+            console.log('No clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.navCtrl.pop();
+            console.log('yes clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 }

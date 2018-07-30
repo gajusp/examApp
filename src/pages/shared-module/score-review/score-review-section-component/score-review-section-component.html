@@ -1,0 +1,25 @@
+<!--
+  Generated template for the QuestionBankPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content class="card-background-page">
+  <div *ngFor="let selectedQA of scoreReviewArr;">
+    <div style="padding: 2%; border-bottom: 0.55px solid #c8c7cc;font-size: 16px;">
+      {{selectedQA.question}}
+      <!-- <img [src]="selectedQA.img_url" *ngIf="selectedQA.img_url"> -->
+    </div>
+    <!-- Answer content here -->
+    <!-- <ion-list inset>
+      <ion-item *ngFor="selectedQA.options; let indx = index">
+        <span style="display: flex;">
+          {{indx + 1 }}.
+          <div [ngClass]="answerObj.selectedRow ? 'selected-answer': ''">
+            {{ answerObj.answer}}
+          </div>
+        </span>
+      </ion-item>
+    </ion-list> -->
+  </div>
+</ion-content>

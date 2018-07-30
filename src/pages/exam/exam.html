@@ -35,13 +35,13 @@
     </div>
 
     <!-- Question content starts here -->
-    <div *ngIf="isExamStart && !isAllQuestionCompleted">
+    <div *ngIf="isExamStart && !isAllQuestionCompleted && !isReviewScore">
       <question-section-component (selectedAnswerEvent)="onSelectedAnswer($event)">
       </question-section-component>
     </div>
 
     <!-- Result Board -->
-    <div *ngIf="isAllQuestionCompleted">
+    <div *ngIf="isAllQuestionCompleted && !isReviewScore">
       <div>
         Your Score board :
         <div>
@@ -63,8 +63,8 @@
     </div>
 
     <!-- Score Board -->
-    <div>
-
+    <div *ngIf="isReviewScore">
+      <score-review-section-component></score-review-section-component>
     </div>
   </ion-card>
 
