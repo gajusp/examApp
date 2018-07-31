@@ -7,6 +7,7 @@ import {
 } from "../../app/services/app-store.service";
 import { QAConfigModal, QAAnswerModal } from "../../app/models/models";
 import { selectedQAAction, selectedAnswerAction } from "../home/home.action";
+import { QuestionSectionComponent } from "../shared-module/question/question-section-component/question-section-component";
 
 /**
  * Generated class for the ExamPage page.
@@ -63,7 +64,7 @@ export class ExamPage {
         this.resetData();
         this.navCtrl.pop();
       } else {
-        this.exitExampConfirmAlert(uiEvt);
+        this.exitExitConfirmAlert(uiEvt);
       }
     };
   }
@@ -106,7 +107,7 @@ export class ExamPage {
     this.appStore.dispatch(
       new selectedQAAction(this.allQAData[this.currentQuestionIndex])
     );
-    this.startTimerCounter(30);
+    // this.startTimerCounter(30);
     // Result board logic
     if (this.currentQuestionIndex === this.allQAData.length) {
       this.clearTimer();
@@ -129,7 +130,7 @@ export class ExamPage {
     this.isExamStart = true;
     this.showFooter = true;
     this.currentQuestionIndex = 0;
-    this.startTimerCounter(30);
+    // this.startTimerCounter(30);
   }
 
   calculatePassingPercent() {
@@ -157,7 +158,7 @@ export class ExamPage {
     }
   };
 
-  exitExampConfirmAlert(uiEvt: UIEvent) {
+  exitExitConfirmAlert(uiEvt: UIEvent) {
     const confirm = this.alertCtrl.create({
       title: 'Are you want to exist exam?',
       message: '',

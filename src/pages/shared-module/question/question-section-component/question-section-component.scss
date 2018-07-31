@@ -1,5 +1,21 @@
 question-section-component {
+
+    .qa-header{
+     padding: 10px 8px;
+     border-bottom: 2.55px solid #c8c7cc;
+     font-size: 16px;
+     font-weight: 500;
+     background: #a9a9a96b;
+    }
+
     .selected-answer {
         background: darkgrey;
+    }
+
+    .qa-answer{
+        margin: 10px 2px 5px 5px !important;
+        .span-display{
+            display: flex;
+        }
     }
 }

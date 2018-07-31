@@ -6,19 +6,15 @@
 -->
 
 <div>
-  <div style="padding: 2%; border-bottom: 0.55px solid #c8c7cc;font-size: 16px;">
-    {{selectedQA.question}}
-    <!-- <img [src]="selectedQA.img_url" *ngIf="selectedQA.img_url"> -->
+  <div class="qa-header">
+    Q. {{selectedQA.question}}
+    <img [src]="selectedQA.img_url" *ngIf="selectedQA.img_url">
   </div>
   <!-- Answer content here -->
-  <ion-list inset>
-    <ion-item *ngFor="let answerObj of selectedQA.options; let indx = index">
-      <!-- [ngClass]="isSelectedAnswer : 'selected-answer' : ''"  -->
-      <span style="display: flex;">
-        {{indx + 1 }}.
-        <div (tap)="onTapAnswer(answerObj)" [ngClass]="answerObj.selectedRow ? 'selected-answer': ''">
-          {{ answerObj.answer}}
-        </div>
+  <ion-list inset class="qa-answer">
+    <ion-item *ngFor="let answerObj of selectedQA.options; let indx = index" text-wrap>
+      <span (tap)="onTapAnswer(answerObj)" [ngClass]="answerObj.selectedRow ? 'selected-answer': ''" class="span-display">
+        {{indx + 1 }}. {{answerObj.answer}}
       </span>
     </ion-item>
   </ion-list>

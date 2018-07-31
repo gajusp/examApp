@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { QAConfigModal } from "../models/models";
+import { Observable } from "../../../node_modules/rxjs/Observable";
 
 @Injectable()
 export class QuestionAnswerService {
@@ -36,7 +37,7 @@ export class QuestionAnswerService {
     return this.wrongAnswer.length;
   }
 
-  public getQuestionanswerDataAsync(dataPath: string) {
+  public getQuestionanswerDataAsync(dataPath: string): Observable<Object> {
     return this.http.get(dataPath);
     // .subscribe(data => {
     //   this.questionAnswerArr = data;
